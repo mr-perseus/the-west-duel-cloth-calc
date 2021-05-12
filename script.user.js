@@ -11,7 +11,7 @@
 // @grant       none
 // ==/UserScript==
 
-(function(fn) {
+(function (fn) {
     const script = document.createElement('script');
     script.setAttribute('type', 'application/javascript');
     script.textContent = `(${fn})();`;
@@ -56,7 +56,7 @@
             init() {
                 PlayerProfileMain.backup_twdcc_setWear =
                     PlayerProfileMain.setWear;
-                PlayerProfileMain.setWear = function() {
+                PlayerProfileMain.setWear = function () {
                     PlayerProfileMain.backup_twdcc_setWear.apply(
                         this,
                         arguments,
@@ -72,7 +72,7 @@
                         if (
                             this.resp.wear[key] &&
                             (key === 'animal' ||
-                            key === 'yield' /* Product */ ||
+                                key === 'yield' /* Product */ ||
                                 key === 'head' ||
                                 key === 'body' ||
                                 key === 'pants' ||
@@ -89,10 +89,11 @@
                         }
                     });
 
-                    const values = TWDCC.DuelClothCalc.getSkillValuesFromItemKeys(
-                        playerLevel,
-                        itemKeys,
-                    );
+                    const values =
+                        TWDCC.DuelClothCalc.getSkillValuesFromItemKeys(
+                            playerLevel,
+                            itemKeys,
+                        );
                     const popupData = TWDCC.DuelClothCalc.getPopupData(values);
 
                     const duelistPopup = TWDCC.DuelClothCalc.generateNpcPopup(
@@ -109,9 +110,8 @@
             },
 
             getSkillValuesFromItemKeys(playerLevel, itemKeys) {
-                const itemObjects = TWDCC.DuelClothCalc.getItemObjects(
-                    itemKeys,
-                );
+                const itemObjects =
+                    TWDCC.DuelClothCalc.getItemObjects(itemKeys);
                 const sets = TWDCC.DuelClothCalc.getSetsNumbers(itemObjects);
                 const setObjects = TWDCC.DuelClothCalc.getSetData(sets);
 
@@ -166,9 +166,10 @@
                 };
 
                 itemObjects.forEach((itemObject) => {
-                    const newValuesBonus = TWDCC.DuelClothCalc.getBonusObjectValues(
-                        itemObject.bonus.item,
-                    );
+                    const newValuesBonus =
+                        TWDCC.DuelClothCalc.getBonusObjectValues(
+                            itemObject.bonus.item,
+                        );
                     TWDCC.DuelClothCalc.factorizeValues(
                         newValuesBonus,
                         playerLevel,
@@ -177,9 +178,8 @@
 
                     TWDCC.DuelClothCalc.addToValues(values, newValuesBonus);
 
-                    const newValuesSimple = TWDCC.DuelClothCalc.getSimpleObjectValues(
-                        itemObject,
-                    );
+                    const newValuesSimple =
+                        TWDCC.DuelClothCalc.getSimpleObjectValues(itemObject);
                     TWDCC.DuelClothCalc.addToValues(values, newValuesSimple);
                 });
 
@@ -263,17 +263,19 @@
                         const valuesSetSimple = {};
 
                         for (let index = 2; index <= sets[key]; index += 1) {
-                            const valuesSetBonusLevel = TWDCC.DuelClothCalc.getBonusObjectValues(
-                                setData.bonus[index],
-                            );
+                            const valuesSetBonusLevel =
+                                TWDCC.DuelClothCalc.getBonusObjectValues(
+                                    setData.bonus[index],
+                                );
                             TWDCC.DuelClothCalc.addToValues(
                                 valuesSetBonus,
                                 valuesSetBonusLevel,
                             );
 
-                            const valuesSetSimpleLevel = TWDCC.DuelClothCalc.getSimpleSetObjectValues(
-                                setData.bonus[index],
-                            );
+                            const valuesSetSimpleLevel =
+                                TWDCC.DuelClothCalc.getSimpleSetObjectValues(
+                                    setData.bonus[index],
+                                );
                             TWDCC.DuelClothCalc.addToValues(
                                 valuesSetSimple,
                                 valuesSetSimpleLevel,
@@ -356,21 +358,26 @@
                         TWDCC.serverUrl
                     }.innogamescdn.com/images/window/duels/npcskill_punch.jpg" /></td>` +
                     `<td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_aim.jpg" /></td><td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_appearance.jpg" /></td><td></td></tr>` +
-                    `<tr><td class="text_bold">${npcData.shot ||
-                        0}</td><td class="text_bold">${npcData.punch ||
-                        0}</td>` +
-                    `<td class="text_bold">${npcData.aim ||
-                        0}</td><td class="text_bold">${npcData.appearance ||
-                        0}</td><td></td></tr>` +
+                    `<tr><td class="text_bold">${
+                        npcData.shot || 0
+                    }</td><td class="text_bold">${npcData.punch || 0}</td>` +
+                    `<td class="text_bold">${
+                        npcData.aim || 0
+                    }</td><td class="text_bold">${
+                        npcData.appearance || 0
+                    }</td><td></td></tr>` +
                     `<tr><td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_tactic.jpg" /></td><td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_reflex.jpg" /></td>` +
                     `<td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_dodge.jpg" /></td><td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_tough.jpg" /></td><td><img src="https://west${TWDCC.serverUrl}.innogamescdn.com/images/window/duels/npcskill_health.jpg" /></td></tr>` +
-                    `<tr><td class="text_bold">${npcData.tactic ||
-                        0}</td><td class="text_bold">${npcData.reflex ||
-                        0}</td>` +
-                    `<td class="text_bold">${npcData.dodge ||
-                        0}</td><td class="text_bold">${npcData.tough ||
-                        0}</td><td class="text_bold">${npcData.health ||
-                        0}</td></tr>${
+                    `<tr><td class="text_bold">${
+                        npcData.tactic || 0
+                    }</td><td class="text_bold">${npcData.reflex || 0}</td>` +
+                    `<td class="text_bold">${
+                        npcData.dodge || 0
+                    }</td><td class="text_bold">${
+                        npcData.tough || 0
+                    }</td><td class="text_bold">${
+                        npcData.health || 0
+                    }</td></tr>${
                         weapon
                             ? `<tr><td colspan="2" class="text_bold"><img src="${weapon.image}" /></td><td colspan="3" class="text_bold"><br />${weapon.name}<br />(` +
                               'Damage' +
@@ -390,10 +397,11 @@
             // eslint-disable-next-line no-undef
             TWDuelClothCalc = {
                 getRealSkillValuesFormatted(playerLevel, itemKeys) {
-                    const values = TWDCC.DuelClothCalc.getSkillValuesFromItemKeys(
-                        playerLevel,
-                        itemKeys,
-                    );
+                    const values =
+                        TWDCC.DuelClothCalc.getSkillValuesFromItemKeys(
+                            playerLevel,
+                            itemKeys,
+                        );
                     return {
                         strength: {
                             build: values.strength + values.build,
